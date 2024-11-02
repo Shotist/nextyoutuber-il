@@ -20,7 +20,7 @@ export function Timer() {
       const minutes = Math.floor((difference / 1000 / 60) % 60);
       const seconds = Math.floor((difference / 1000) % 60);
 
-      setTimeLeft({ days, hours, minutes, seconds });
+      setTimeLeft({ seconds, minutes, hours, days });
     };
 
     const timer = setInterval(updateTimer, 1000);
