@@ -30,14 +30,14 @@ export default function App() {
                 <div>
                   <h3 className="font-bold text-xl text-red-100">מתי?</h3>
                   <p className="text-red-200">יום חמישי, 21.11.2024</p>
-                  <p className="text-red-300">20:00</p>
+                  <p className="text-red-300">12:00</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4 rtl:space-x-reverse group">
                 <MapPin className="w-8 h-8 text-red-400 flex-shrink-0 transition-transform group-hover:scale-110" />
                 <div>
                   <h3 className="font-bold text-xl text-red-100">איפה?</h3>
-                  <p className="text-red-200">היכל מנורה מבטחים</p>
+                  <p className="text-red-200">אולם סמולרש</p>
                   <p className="text-red-300">תל אביב</p>
                 </div>
               </div>
@@ -46,7 +46,9 @@ export default function App() {
                 <div>
                   <h3 className="font-bold text-xl text-red-100">מה בתוכנית?</h3>
                   <p className="text-red-200">תחרות חיה</p>
-                  <p className="text-red-300">הופעות מיוחדות</p>
+                  <p className="text-red-300">אינטראקציה עם הקהל</p>
+                  <p className="text-red-300">אתגרים ומשימות</p>
+                  <p className="text-red-300">סרטונים עם הקהל</p>
                 </div>
               </div>
             </div>
@@ -55,7 +57,7 @@ export default function App() {
 
         <section className="text-center">
           <a 
-            href="https://www.paypal.com/paypalme/boazthecatlord" 
+            href="https://www.youtube.com/watch?v=11GKqZPi41s" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white text-xl font-bold py-6 px-12 rounded-full inline-flex items-center justify-center space-x-3 rtl:space-x-reverse transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(239,68,68,0.6)]"
