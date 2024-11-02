@@ -20,7 +20,7 @@ export function Timer() {
       const minutes = Math.floor((difference / 1000 / 60) % 60);
       const seconds = Math.floor((difference / 1000) % 60);
 
-      setTimeLeft({ seconds, minutes, hours, days });
+      setTimeLeft({ days, hours, minutes, seconds });
     };
 
     const timer = setInterval(updateTimer, 1000);
@@ -34,10 +34,10 @@ export function Timer() {
       <h2 className="text-3xl font-bold text-center mb-8 animate-pulse-glow">הספירה לאחור החלה</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
         {[
-          { label: 'ימים', value: timeLeft.days },
-          { label: 'שעות', value: timeLeft.hours },
+          { label: 'שניות', value: timeLeft.seconds },
           { label: 'דקות', value: timeLeft.minutes },
-          { label: 'שניות', value: timeLeft.seconds }
+          { label: 'שעות', value: timeLeft.hours },
+          { label: 'ימים', value: timeLeft.days }
         ].map((item, index) => (
           <div key={index} className="bg-gradient-to-br from-red-900/40 to-red-800/40 rounded-lg p-6 text-center backdrop-blur-sm">
             <div className="text-4xl font-bold text-red-100 mb-2">{item.value}</div>
