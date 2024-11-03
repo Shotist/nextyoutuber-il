@@ -20,7 +20,7 @@ interface Contestant {
 const contestants: Contestant[] = [
   {
     name: 'אור לסרי',
-    image: 'https://cdn.discordapp.com/attachments/473598884434673664/1302294039718265025/d49c3a2d9a1c92fc.png?ex=67279756&is=672645d6&hm=b1af13071d5193ff6bc6b049664e08faf85a878d57d35322bfbbdc6980f6c603&',
+    image: 'https://shotist.net/nextil/orlasry.png',
     subscribers: '44.5K',
     specialty: 'בבויה',
     votes: 0,
@@ -33,7 +33,7 @@ const contestants: Contestant[] = [
   },
   {
     name: 'נדב Marci',
-    image: 'https://cdn.discordapp.com/attachments/473598884434673664/1302294877777690655/dc4f92cee82b954a.png?ex=6727981e&is=6726469e&hm=bdacaf20ef1e0a96952f66679a49d08251a41fe7a00576c7da1d4bcd31fbebfe&',
+    image: 'https://shotist.net/nextil/marci.png',
     subscribers: '62.8K',
     specialty: 'אוכל',
     votes: 0,
@@ -46,7 +46,7 @@ const contestants: Contestant[] = [
   },
   {
     name: 'נתי קנטור',
-    image: 'https://cdn.discordapp.com/attachments/473598884434673664/1302295352761647215/e6eb6bcb4d2100f2.jpg?ex=6727988f&is=6726470f&hm=5cb21becc0fe9e032e5a9e7eb8914abe47d0a5237c756ea4f70aa2c401ec0b8f&',
+    image: 'https://shotist.net/nextil/natti.jpg',
     subscribers: '12K',
     specialty: 'מקריטה',
     votes: 0,
@@ -59,7 +59,7 @@ const contestants: Contestant[] = [
   },
   {
     name: 'אלבזון',
-    image: 'https://cdn.discordapp.com/attachments/473598884434673664/1302296013326913677/c64f80e14380104c.jpg?ex=6727992d&is=672647ad&hm=6e350666bff08ea545a735512af099bf667bcf8800dd6cda661ecb4fe4a91464&',
+    image: 'https://shotist.net/nextil/elbaz.jpg',
     subscribers: '92.1K',
     specialty: 'גיימינג',
     votes: 0,
@@ -72,7 +72,7 @@ const contestants: Contestant[] = [
   },
   {
     name: 'אלנתן אלפרט',
-    image: 'https://cdn.discordapp.com/attachments/473598884434673664/1302296299869048904/b4593f5697e67a3b.jpg?ex=67279971&is=672647f1&hm=f5f78a53f155215f723d2e79bf418cc5598b6ce87371cf39b0c3a79d93a29928&',
+    image: 'https://shotist.net/nextil/elnatan.jpg',
     subscribers: '7.41K',
     specialty: 'וולוגים',
     votes: 0,
