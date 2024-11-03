@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Youtube, Instagram, Flame, ThumbsUp, Users, Video, Award } from 'lucide-react';
 import { Modal } from './Modal';
+import pb from '../../pocketbase.ts';
 
 interface Contestant {
   name: string;
@@ -13,6 +14,7 @@ interface Contestant {
   joinDate: string;
   topVideo: string;
   awards: string[];
+  uid: string;
 }
 
 const contestants: Contestant[] = [
@@ -26,7 +28,8 @@ const contestants: Contestant[] = [
     totalViews: '3.7M',
     joinDate: '2024',
     topVideo: 'בניתי פארק מים ענק בבית שלי!',
-    awards: ['דילן דרור גוניור', 'ילד הבבויה']
+    awards: ['דילן דרור גוניור', 'ילד הבבויה'],
+    uid: "vmbqyfh22qwrry8"
   },
   {
     name: 'נדב Marci',
@@ -38,7 +41,8 @@ const contestants: Contestant[] = [
     totalViews: '5.1M',
     joinDate: '2012',
     topVideo: 'נחש מי גרסת היוטיוברים (עם מאסטר אוהד)',
-    awards: ['שחקן בראול סטארס', 'אוהב מזון']
+    awards: ['שחקן בראול סטארס', 'אוהב מזון'],
+    uid: "6zwusk11am3srgp"
   },
   {
     name: 'נתי קנטור',
@@ -50,7 +54,8 @@ const contestants: Contestant[] = [
     totalViews: '176K',
     joinDate: '2021',
     topVideo: 'סטטיק ובן אל תבורי & נטע ברזילי - אפס מאמץ | פרודיה',
-    awards: ['אוהב סמים מס. 1 בארץ', 'רשות הלוחמה בסמים']
+    awards: ['אוהב סמים מס. 1 בארץ', 'רשות הלוחמה בסמים'],
+    uid: "kz06d1gx94veryj"
   },
   {
     name: 'אלבזון',
@@ -62,7 +67,8 @@ const contestants: Contestant[] = [
     totalViews: '10M',
     joinDate: '2023',
     topVideo: 'תחרות טריוויה הגדולה ביותר בבראול סטארס ישראל ! ( על 1000 יהלומים ! )',
-    awards: ['חרשן השנה']
+    awards: ['חרשן השנה'],
+    uid: "jzy95qleav23u0i"
   },
   {
     name: 'אלנתן אלפרט',
@@ -74,17 +80,77 @@ const contestants: Contestant[] = [
     totalViews: '1.1M',
     joinDate: '2024',
     topVideo: 'וולוג 9 - בנינו בריכה במבנה נטוש (זה לא הלך כמתוכנן…😱)',
-    awards: ['וולוגר עם אבא משוגע']
+    awards: ['וולוגר עם אבא משוגע'],
+    uid: "xoh6ze2kuf2dx6x"
   },
 ];
 
 export function Contestants() {
   const [votes, setVotes] = useState(contestants.map(c => c.votes));
   const [selectedContestant, setSelectedContestant] = useState<Contestant | null>(null);
-
-  const handleVote = (index: number) => {
-    setVotes(prev => prev.map((v, i) => i === index ? v + 1 : v));
+  
+  useEffect(() => {
+    const fetchVotes = async () => {
+      try {
+        const updatedVotes = await Promise.all(
+          contestants.map(async (contestant) => {
+            try {
+              const data = await pb.collection('votes').getOne(contestant.uid);
+              return data.votes || 0; // Use 0 if no votes are found
+            } catch (error) {
+              console.warn(`Error fetching votes for ${contestant.uid}:`, error);
+              return 0; // Default to 0 if there's an error
+            }
+          })
+        );
+        setVotes(updatedVotes);
+      } catch (error) {
+        console.error('Error fetching votes:', error);
+      }
+    };
+  
+    fetchVotes();
+  }, []);
+    
+  const handleVote = async (index: number) => {
+    const hasVoted = sessionStorage.getItem('hasVoted');
+  
+    if (hasVoted) {
+      alert("You've already voted!");
+      return;
+    }
+  
+    try {
+      console.log('Updating votes...');
+      const contestant = contestants[index];
+  
+      // Increment the vote count in the database by 1
+      const currentVotes = await pb.collection('votes').getOne(contestant.uid);
+      await pb.collection('votes').update(contestant.uid, {
+        votes: currentVotes.votes + 1,
+      });
+  
+      // Fetch the updated vote count to ensure accuracy
+      const updatedContestant = await pb.collection('votes').getOne(contestant.uid);
+  
+      // Update the local state with the new vote count
+      setVotes(prev => prev.map((v, i) => (i === index ? updatedContestant.votes : v)));
+      contestants[index].votes = updatedContestant.votes;
+  
+      // Store voting status in session storage
+      sessionStorage.setItem('hasVoted', 'true');
+      sessionStorage.setItem('votedContestant', contestant.uid);
+  
+      alert('Vote successful!');
+    } catch (error) {
+      console.error('Error updating votes:', error);
+    }
   };
+      // const handleVote = (index: number) => {
+    
+  //   setVotes(prev => prev.map((v, i) => i === index ? v + 1 : v));
+    
+  // };
 
   return (
     <>
